@@ -1,0 +1,80 @@
+/* CSS Document */
+
+.bgImage
+{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: -999999999;
+	top: 0;
+	left: 0;
+	background-image: url("../images/bgImage/bgImage1.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.navbar
+{
+	z-index: 99999999;
+	position: fixed;
+	width: 100%;
+	height: 50px;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.8);
+	border-bottom: thin solid #fff;
+	color: #fff;
+}
+
+.navdirectory
+{
+	position: fixed;
+	width: 300px;
+	height: calc(100% - 50px);
+	top: 50px;
+	left: 0;
+	background-color: rgba(0,0,0,0.8);
+	border-right: thin solid #fff;
+	border-top: thin solid #fff;
+	color: #fff;
+}
+
+.screen-small-wrapper
+{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 99999999;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.95);
+	display: none;
+}
+
+.screen-small-wrapper p{
+	width: auto;
+	height: auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+@media only screen and (max-width: 600px) {
+.screen-small-wrapper
+{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 99999999;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.95);
+	display: block;
+	color: #fff;
+	text-align: center;
+}
+}
+
+
+
