@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
 <title>Text Editor</title>
 <link rel="stylesheet" href="style/style.css" type="text/css">
 </head>
@@ -10,7 +10,21 @@
 <body>
 	<div class="bgImage"></div>
 	<div class="navbar">
-	
+		<ul>
+			<li><div class="navButton" id="navbarFile">File</div></li>
+			<li><div class="navButton" id="navbarEdit">Edit</div></li>
+			<li><div class="navButton" id="navbarView">View</div></li>
+			<li><div class="navButton" id="navbarInsert">Insert</div></li>
+			<li><div class="navButton" id="navbarFind">Find</div></li>
+			<li><div class="navButton" id="navbarHelp">Help</div></li>
+		</ul>
+		<div class="navbar-right">
+			<select>
+				<option value="background1" selected>Background1</option>
+				<option value="background2">Background2</option>
+				<option value="background3">Background3</option>
+			</select>
+		</div>
 	</div>
 	
 	<div class="navdirectory">
@@ -18,12 +32,21 @@
 	</div>
 	
 	<div class="editor-wrapper">
-	
+		<div class="file">
+		<div class="linesCounter">
+			1
+		</div>
+		<div contenteditable="true" class="content">
+			
+				#Code Starts Here
+		
+		</div>
+		</div>
 	</div>
 	<div class="screen-small-wrapper">
-		<p>
+		
 			Website Not Visible in Portrait Mode
-		</p>
+	
 	</div>
 </body>
 </html>
