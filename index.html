@@ -1,16 +1,33 @@
 <!doctype html>
+<!-- Html tag initialisation -->
 <html>
+<!-- head tag initialisation -->
 <head>
 <meta charset="utf-8">
-
+<!-- title tag initialisation to be seen in tab title-->
 <title>Text Editor</title>
+<!-- Link to stylesheet (Gives beauty to page) tag initialisation -->	
 <link rel="stylesheet" href="style/style.css" type="text/css">
+	<!-- Head tag close -->
+	<script>
+	function fullScreen()
+		{
+			document.documentElement.requestFullscreen();
+		}
+	
+	</script>
 </head>
-
-<body>
-	<div class="bgImage"></div>
+	<!-- Body tag initialisation -->
+<body onLoad="fullScreen()">
+	<!-- div tag with class(bgImage) and id(bgImagesrc) tag initialisation -->
+	<!-- Note class name may or may not be unique but that's not the case of id -->
+	<div class="bgImage" id="bgImagesrc"></div>
+	
+	<!-- div with class(navbar) used to create navigation bar -->
 	<div class="navbar">
+		<!-- ul(Unordered List) tag initialisation -->
 		<ul>
+			<!-- li(List Item) tag initialisation -->
 			<li><div class="navButton" id="navbarFile">File</div></li>
 			<li><div class="navButton" id="navbarEdit">Edit</div></li>
 			<li><div class="navButton" id="navbarView">View</div></li>
@@ -19,16 +36,79 @@
 			<li><div class="navButton" id="navbarHelp">Help</div></li>
 		</ul>
 		<div class="navbar-right">
-			<select>
-				<option value="background1" selected>Background1</option>
-				<option value="background2">Background2</option>
-				<option value="background3">Background3</option>
+			
+			<!-- select tag initialisation used to define  -->
+			<select onChange="changeBackground()" id="bgValue">
+				<option value="no" selected>Select Background</option>
+				<option value="bgImage1">Background1</option>
+				<option value="bgImage2">Background2</option>
+				<option value="bgImage3">Background3</option>
 			</select>
 		</div>
 	</div>
 	
 	<div class="navdirectory">
-	
+		<form>
+			<div class="navdirectory-fields">
+			<div>
+			<b>File Type:</b> <br>
+			<select name="fileType" id="fileType" class="fileInput" required> 
+				<option value="noFile" selected>Select File Type</option>
+				<optgroup label="Programming Languages">
+					<option value="c">C</option>
+					<option value="cpp">C++</option>
+					<option value="java">JAVA</option>
+					<option value="csharp">C#</option>
+					<option value="python2">Python 2.x</option>
+					<option value="python3">Python3.x</option>
+					<option value="go">Go</option>
+					<option value="cobol">COBOL</option>
+					<option value="fortron">FORTRON</option>
+					<option value="swift">Swift</option>
+				</optgroup>
+				<optgroup label="Scripting Languages">
+					<option value="js">Java Script</option>
+					<option value="jsp">JSP</option>
+					<option value="php">PHP</option>
+					<option value="perl">PERL</option>
+					<option value="asp">ASP</option>
+					<option value="tcl">TCL</option>
+				</optgroup>
+				<optgroup label="Markup Languages">
+					<option value="html">HTML</option>
+					<option value="xml">XML</option>
+					<option value="bbc">BBC</option>
+					<option value="sgml">SGML</option>
+				</optgroup>
+				<optgroup label="DBMS Languages">
+					<option value="mysql">MySQL</option>
+					<option value="psql">PostgreSQL</option>
+					<option value="msaccess">MS Access</option>
+					<option value="json">JSON</option>
+				</optgroup>
+				<optgroup label="Game Scripting Languages">
+					<option value="lua">Lua</option>
+					<option value="angelscript">AngelScript</option>
+					<option value="gamemonkey">GameMonkey</option>
+					<option value="io">Io</option>
+					<option value="pawn">Pawn</option>
+					<option value="squirrel">Squirrel</option>
+				</optgroup>
+			</select>
+			</div>
+		
+			<div>
+			<b>File Name:</b>
+			<input type="text" name="fileName" placeholder="Enter File Name" class="fileInput" required>
+			</div>
+			</div>
+			
+			
+			<div class="navdirectory-submit">
+			<input type="submit" value="Save" name="saveFile" class="fileInput" style="background: rgba(0,0,0,0.75); color: #fff; box-shadow: inset 0 0 5px 2px #fff;">
+			</div>
+			
+		</form>
 	</div>
 	
 	<div class="editor-wrapper">
@@ -36,11 +116,7 @@
 		<div class="linesCounter">
 			1
 		</div>
-		<div contenteditable="true" class="content">
-			
-				#Code Starts Here
-		
-		</div>
+		<div contenteditable="true" class="content" id="editorText" onKeyDown="countWords()">#Code Starts Here</div>
 		</div>
 	</div>
 	<div class="screen-small-wrapper">
@@ -53,5 +129,20 @@
 			&copy; navdeepisno1
 		</p>
 	</div>
+	<script>
+	function changeBackground()
+		{
+			var bg = document.getElementById("bgValue").value;
+			console.log(bg);
+			if(bg != "no")
+			document.getElementById("bgImagesrc").style.backgroundImage = 'url("images/bgImage/' + bg + '.jpg")';
+			else
+				alert("Select Background of your choice");
+				return false;
+		}
+	</script>
+	
+	
+	
 </body>
 </html>
