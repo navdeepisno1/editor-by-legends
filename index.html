@@ -4,6 +4,10 @@
 <!-- head tag initialisation -->
 <head>
 <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- title tag initialisation to be seen in tab title-->
 <title>Text Editor</title>
 <!-- Link to stylesheet (Gives beauty to page) tag initialisation -->	
@@ -14,11 +18,10 @@
 		{
 			document.documentElement.requestFullscreen();
 		}
-	
 	</script>
 </head>
 	<!-- Body tag initialisation -->
-<body onLoad="fullScreen()">
+<body onLoad="checkKeyword()">
 	<!-- div tag with class(bgImage) and id(bgImagesrc) tag initialisation -->
 	<!-- Note class name may or may not be unique but that's not the case of id -->
 	<div class="bgImage" id="bgImagesrc"></div>
@@ -33,7 +36,7 @@
 			<li><div class="navButton" id="navbarView">View</div></li>
 			<li><div class="navButton" id="navbarInsert">Insert</div></li>
 			<li><div class="navButton" id="navbarFind">Find</div></li>
-			<li><div class="navButton" id="navbarHelp">Help</div></li>
+			<li><div class="navButton" id="navbarHelp" onClick="changeFocus(this.id)">Help</div></li>
 		</ul>
 		<div class="navbar-right">
 			
@@ -114,9 +117,9 @@
 	<div class="editor-wrapper">
 		<div class="file">
 		<div class="linesCounter">
-			1
+			
 		</div>
-		<div contenteditable="true" class="content" id="editorText" onKeyDown="countWords()">#Code Starts Here</div>
+		<p contenteditable="true" class="content" id="editorText" onKeyUp="checkKeyword()">#Code Starts Here</p>
 		</div>
 	</div>
 	<div class="screen-small-wrapper">
@@ -124,25 +127,111 @@
 			<p>Website Not Visible in Portrait Mode</p>
 	
 	</div>
-	<div class="footer">
-		<p>
-			&copy; navdeepisno1
-		</p>
+	<div id="navHelp" class="help-wrapper-hidden">
+		<div class="mainDiv">
+			<button onClick="changeFocus('navbarHelp')" class="position-absolute-right">CLOSE</button>
+			<h1 class="font-white">Help</h1>
+			
+			<hr>
+			<div class="helpText">
+			<marquee direction="up">
+				Created and Developed By <b>Navdeep Sharma</b>
+				
+			</marquee>
+			</div>
+			<hr>
+				
+			<h4 class="font-white">
+				&copy;suvidha	
+			</h4>
+		</div>
 	</div>
 	<script>
+	function getLocalText()	
+		{
+			var x = localStorage.getItem("editorText");
+			if(x == null || x =="" || x=="<br>")
+				{
+					return false;
+				}
+			else
+				{
+					document.getElementById("editorText").innerHTML = x;
+				}
+		}
+		document.addEventListener("onLoad",getLocalText());
+		
+	var x;
+	function checkKeyword()
+		{
+			x = document.getElementById("editorText").innerText.trim().split(" ");
+			console.log(x);
+			var t = 0; 
+			for(let i=0;i<x.length;i++)
+				{
+					var temp = x[i].trim().split("\n");
+					for(let j=0;j<temp.length;j++)
+						{
+							t++;
+						}
+				}
+			if(x[0] == "")
+				t=0;
+			document.getElementById("wordCount").innerHTML = "Words : " + t + " (will be saved automatically)";
+			saveText();
+			getLocalText();
+			console.log(t);
+		}
+		
+		
 	function changeBackground()
 		{
 			var bg = document.getElementById("bgValue").value;
-			console.log(bg);
+			//console.log(bg);
 			if(bg != "no")
 			document.getElementById("bgImagesrc").style.backgroundImage = 'url("images/bgImage/' + bg + '.jpg")';
 			else
 				alert("Select Background of your choice");
 				return false;
 		}
+		
+	function changeFocus(elementId)
+		{
+			var c;
+			switch(elementId)
+					{
+				case "navbarFile":
+					break;
+				case "navbarHelp":
+					toggleClass("navHelp");
+					break;
+			}
+		}
+		
+	function toggleClass(parentElementId)
+		{
+			if(document.getElementById(parentElementId).style.display == "block")
+						{
+							document.getElementById(parentElementId).style.display = "none";
+						}
+					else
+						{
+							document.getElementById(parentElementId).style.display = "block";
+						}
+		}
+	function saveText()
+		{
+			var s = document.getElementById("editorText").innerHTML;
+			localStorage.setItem("editorText",s);
+			document.getElementById("wordCount").innerHTML = "Words : " + t + " (saved)";
+		}
 	</script>
 	
-	
+	<div class="footer" style="line-height: 50px;">
+		<p id="wordCount">
+			&copy; navdeepisno1
+		</p>
+	</div>
 	
 </body>
 </html>
